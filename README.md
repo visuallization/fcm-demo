@@ -1,6 +1,6 @@
 # FCM Demo
 
-This repo demonstrates working with FCM (Firebase Cloud Messages)
+git remote add origin git@github.com:visuallization/fcm-demo.git
 
 ## Getting Started
 
@@ -16,7 +16,10 @@ This repo demonstrates working with FCM (Firebase Cloud Messages)
 
 ## Sending Messages
 
+You have the possibility to choose between 2 different FCM APIs:
+
 ### Firebase Cloud Messaging API (V1)
+In your terminal run
 ```
 curl --location --request POST 'https://fcm.googleapis.com/v1/projects/<PROJECT_ID>/messages:send' \
 --header 'Authorization: Bearer <ACCESS_TOKEN>' \
@@ -39,6 +42,7 @@ curl --location --request POST 'https://fcm.googleapis.com/v1/projects/<PROJECT_
 - `ACCESS_TOKEN` create a success token. Check out this post on how to do this: https://apoorv487.medium.com/testing-fcm-push-notification-http-v1-through-oauth-2-0-playground-postman-terminal-part-2-7d7a6a0e2fa0
 
 ### Cloud Messaging API (Legacy)
+In your terminal run:
 ```
 curl -X POST -H "Authorization: key=<SERVER_KEY>" -H "Content-Type: application/json" -d '{
   "notification": {
@@ -53,3 +57,12 @@ curl -X POST -H "Authorization: key=<SERVER_KEY>" -H "Content-Type: application/
 
 - `SERVER_KEY` get the server key from firebase -> Project Settings -> Cloud Messaging -> Cloud Messaging API (Legacy). If Cloud Messaging API (Legacy) does not exist you first need to enable it via google cloud console.
 - `TOKEN` get the token from the console of the react app. It should display something like: "Current Token: ....."
+
+## Useful Links:
+- https://firebase.google.com/docs/web/setup
+- https://firebase.google.com/docs/cloud-messaging/js/client
+- https://firebase.google.com/docs/cloud-messaging/js/receive
+- https://console.firebase.google.com/
+- https://developers.google.com/oauthplayground
+- https://apoorv487.medium.com/testing-fcm-push-notification-http-v1-through-oauth-2-0-playground-postman-terminal-part-2-7d7a6a0e2fa0
+- https://github.com/firebase/quickstart-js/tree/master/messaging
