@@ -44,7 +44,7 @@ curl --location --request POST 'https://fcm.googleapis.com/v1/projects/<PROJECT_
 ```
 
 - `PROJECT_ID` the name of your project in firebase. Can be found in the project settings or in the URL of the firebase project.
-- `TOKEN` get the token from the console of the react app. It should display something like: "Current Token: ....."
+- `TOKEN` get the token via the button `Request Token!` in the app. 
 - `ACCESS_TOKEN` create a success token. Check out this post on how to do this: https://apoorv487.medium.com/testing-fcm-push-notification-http-v1-through-oauth-2-0-playground-postman-terminal-part-2-7d7a6a0e2fa0
 
 #### Cloud Messaging API (Legacy)
@@ -62,7 +62,7 @@ curl -X POST -H "Authorization: key=<SERVER_KEY>" -H "Content-Type: application/
 ```
 
 - `SERVER_KEY` get the server key from firebase -> Project Settings -> Cloud Messaging -> Cloud Messaging API (Legacy). If Cloud Messaging API (Legacy) does not exist you first need to enable it via google cloud console.
-- `TOKEN` get the token from the console of the react app. It should display something like: "Current Token: ....."
+- `TOKEN` get the token via the button `Request Token!` in the app.
 
 ## Useful Links:
 - https://firebase.google.com/docs/web/setup

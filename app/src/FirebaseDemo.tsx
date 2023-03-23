@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getMessaging, getToken, onMessage } from "firebase/messaging";
+import { useState } from "react";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -11,29 +12,11 @@ const firebaseConfig = {
   appId: import.meta.env.VITE_APP_ID
 };
 
-console.log(import.meta.env);
-
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
 // Initialize Firebase Cloud Messaging and get a reference to the service
 const messaging = getMessaging(app);
-
-
-getToken(messaging, { vapidKey: import.meta.env.VITE_VAPID_KEY }).then((currentToken) => {
-  if (currentToken) {
-    console.log("Current Token:", currentToken);
-    // Send the token to your server and update the UI if necessary
-    // ...
-  } else {
-    // Show permission request UI
-    console.log('No registration token available. Request permission to generate one.');
-    // ...
-  }
-}).catch((err) => {
-  console.log('An error occurred while retrieving token. ', err);
-  // ...
-});
 
 onMessage(messaging, (payload) => {
   console.log("Message received. ", payload);
@@ -41,6 +24,8 @@ onMessage(messaging, (payload) => {
 });
 
 function FirebaseDemo() {
+  const [token, setToken] = useState<null | string>('');
+
   function requestPermission() {
     console.log('Requesting permission...');
     Notification.requestPermission().then((permission) => {
@@ -55,8 +40,34 @@ function FirebaseDemo() {
     });
   }
 
+  function requestToken() {
+    getToken(messaging, { vapidKey: import.meta.env.VITE_VAPID_KEY }).then((currentToken) => {
+      if (currentToken) {
+        console.log("Current Token:", currentToken);
+        setToken(currentToken);
+        // Send the token to your server and update the UI if necessary
+        // ...
+      } else {
+        // Show permission request UI
+        console.log('No registration token available. Request permission to generate one.');
+        // ...
+      }
+    }).catch((err) => {
+      console.log('An error occurred while retrieving token. ', err);
+      setToken(null);
+      // ...
+    });
+  }
+
   return (
-    <button onClick={requestPermission}>Request Permission!</button>
+    <>
+      <button onClick={requestToken}>Request Token!</button>
+      <button onClick={requestPermission}>Request Permission!</button>
+      <br/>
+      <div style={{ maxWidth: 400, wordWrap: 'break-word' }}>
+        {token == null ? 'An error occured. Check console for details' :token}
+      </div>
+    </>
   );
 }
 

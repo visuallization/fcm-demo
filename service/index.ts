@@ -16,12 +16,11 @@ admin.initializeApp({
 });
 
 app.get('/', (req: Request, res: Response) => {
-  res.send('Express + TypeScript Server!');
+  res.send('Visit /sendMessage to send messages to the app.');
 });
 
 app.get('/sendMessage', (req: Request, res: Response) => {
-  const registrationToken = 'dI-UiGI-3G50WbvPWcRZ7n:APA91bHoQOF-zKWhjCtfIWgbpOfiPvFwGXAe0PLNDADKXQ5KLGXfas95W5C6XKEnoQhHyydcwDK39pfXchD8puD6lKopvySLz8IkqRSYUCE0vr60HpVuHF7FW16Lx77dYr1_gJnQWMYb';
-
+  const registrationToken = process.env.CLIENT_REGISTRATION_TOKEN as string;
   const message = {
     data: {
       score: '850',
