@@ -1,6 +1,6 @@
-# FCM Demo
+# FCM App
 
-git remote add origin git@github.com:visuallization/fcm-demo.git
+A small FCM web app which receives messages.
 
 ## Getting Started
 
@@ -16,9 +16,15 @@ git remote add origin git@github.com:visuallization/fcm-demo.git
 
 ## Sending Messages
 
-You have the possibility to choose between 2 different FCM APIs:
+You have the possibility to send messages via the service (recommended) or send messages directly via curl and choose between 2 different FCM APIs:
 
-### Firebase Cloud Messaging API (V1)
+### Service
+
+Visit `/sendMessage` to send a message to the client. A more detailed description can be found int the README of the service.
+
+### CURL
+
+#### Firebase Cloud Messaging API (V1)
 In your terminal run
 ```
 curl --location --request POST 'https://fcm.googleapis.com/v1/projects/<PROJECT_ID>/messages:send' \
@@ -41,7 +47,7 @@ curl --location --request POST 'https://fcm.googleapis.com/v1/projects/<PROJECT_
 - `TOKEN` get the token from the console of the react app. It should display something like: "Current Token: ....."
 - `ACCESS_TOKEN` create a success token. Check out this post on how to do this: https://apoorv487.medium.com/testing-fcm-push-notification-http-v1-through-oauth-2-0-playground-postman-terminal-part-2-7d7a6a0e2fa0
 
-### Cloud Messaging API (Legacy)
+#### Cloud Messaging API (Legacy)
 In your terminal run:
 ```
 curl -X POST -H "Authorization: key=<SERVER_KEY>" -H "Content-Type: application/json" -d '{
